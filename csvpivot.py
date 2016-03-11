@@ -88,7 +88,7 @@ def pivot(data, headers, rows, columns, values):
         for column in columns:
             if column not in headers: raise Exception(row + ': not found in headers')
     frame = pandas.DataFrame(data)
-    if rows is None and values.get('fields') == []: raise Exception('rows and values are required')
+    if rows is None or values.get('fields') == []: raise Exception('rows and values must both be specified')
     pivoted = frame.pivot_table(index=rows, columns=columns, values=values.get('fields'), aggfunc=values.get('aggregators'))
     results = pivoted.reset_index().values
     fields = rows + values.get('definitions')
