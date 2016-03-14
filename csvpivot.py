@@ -20,7 +20,7 @@ def main():
     except BaseException as e: sys.exit(e.message.lower())
 
 def arguments():
-    parser = argparse.ArgumentParser(description='pivot CSV files')
+    parser = argparse.ArgumentParser(description='pivot tables for CSV files')
     parser.add_argument('FILE', nargs='?', default='-', help='the CSV file to operate on -- if omitted, will accept input on STDIN')
     parser.add_argument('-r', '--rows', nargs='+', type=str, help='one or more field names that should be used')
     parser.add_argument('-c', '--columns', nargs='+', type=str, help='one or more field names that should be used')

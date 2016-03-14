@@ -1,6 +1,6 @@
 CSV Pivot
 =========
 
-Pivot CSV files in the terminal.
+Pivot tables for CSV files in the terminal.
 
 **A work in progress.**
