@@ -91,7 +91,7 @@ def pivot(data, headers, rows, columns, values):
     frame = pandas.DataFrame(data)
     if rows is None or values.get('fields') == []: raise Exception('rows and values must both be specified')
     pivoted = frame.pivot_table(index=rows, columns=columns, values=values.get('fields'), aggfunc=values.get('aggregators'))
-    results = pivoted.reset_index().values
+    results = pivoted.where(pandas.notnull(pivoted), None).reset_index().values
     columns_values = pivoted.columns.levels[2:]
     columns_values_names = [':'.join(column_value) for column_value in list(itertools.product(*columns_values))]
     columns_values_definitions = [definition + ':' + column for definition in values.get('definitions') for column in columns_values_names]
