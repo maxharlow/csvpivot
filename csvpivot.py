@@ -17,7 +17,7 @@ def main():
         fields, data = pivot(data, headers, args['rows'], args['columns'], values)
         results = output(data, fields)
         print(results)
-    except BaseException as e: sys.exit(e)
+    except BaseException as e: sys.exit(e.message.lower())
 
 def arguments():
     parser = argparse.ArgumentParser(description='pivot CSV files')
