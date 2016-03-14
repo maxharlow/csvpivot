@@ -67,10 +67,11 @@ def interpret(definitions, headers):
     }
     fields = []
     aggregators = {}
-    extractor = re.compile('^(.+)\((.+)\)')
+    extractor = re.compile('^(.+)\((.+)\)$')
     definitions = definitions or []
     for definition in definitions:
         match = re.match(extractor, definition)
+        if match == None: raise Exception(definition + ': not in the correct format')
         operation = match.group(1)
         field = match.group(2)
         if match is None: raise Exception(definition + ': value not correctly specified')
