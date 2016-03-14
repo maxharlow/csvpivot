@@ -40,6 +40,7 @@ def read(filename):
     data_io = io.StringIO(text_decoded) if sys.version_info >= (3, 0) else io.BytesIO(text_decoded.encode('utf8'))
     data = list(csv.reader(data_io))
     headers = data[0]
+    if len(headers) != len(set(headers)): raise Exception(filename + ': has multiple columns with the same name')
     reader_io = io.StringIO(text_decoded) if sys.version_info >= (3, 0) else io.BytesIO(text_decoded.encode('utf8'))
     reader = csv.DictReader(reader_io)
     rows = []
