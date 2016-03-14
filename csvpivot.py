@@ -54,8 +54,8 @@ def read(filename):
 
 def interpret(definitions, headers):
     operations = {
-        'concat': lambda x: ','.join(x),
-        'concatuniq': lambda x: ','.join(x.unique()),
+        'concat': lambda x: ','.join(str(e) for e in x),
+        'concatuniq': lambda x: ','.join(str(e) for e in x.unique()),
         'count': lambda x: len(x),
         'countuniq': lambda x: len(x.unique()),
         'sum': numpy.sum,
