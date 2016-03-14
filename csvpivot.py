@@ -28,7 +28,7 @@ def arguments():
     args = vars(parser.parse_args())
     if args['FILE'] == '-' and sys.stdin.isatty():
         parser.print_help(sys.stderr)
-        parser.exit(1)
+        parser.exit('')
     return args
 
 def read(filename):
