@@ -3,6 +3,7 @@ import os
 import io
 import argparse
 import re
+import math
 import csv
 import chardet
 import itertools
@@ -93,7 +94,8 @@ def pivot(data, headers, rows, columns, values):
     frame = pandas.DataFrame(data)
     if rows is None or values.get('fields') == []: raise Exception('rows and values must both be specified')
     pivoted = frame.pivot_table(index=rows, columns=columns, values=values.get('fields'), aggfunc=values.get('aggregators'))
-    results = pivoted.where(pandas.notnull(pivoted), None).reset_index().values
+    results_set = pivoted.where(pandas.notnull(pivoted), None).reset_index().values
+    results = [[int(v) if isinstance(v, float) and math.floor(v) == v else v for v in result] for result in results_set] # to int where possible
     columns_values = pivoted.columns.levels[2:]
     columns_values_names = [':'.join(column_value) for column_value in list(itertools.product(*columns_values))]
     columns_values_definitions = [definition + ':' + column for definition in values.get('definitions') for column in columns_values_names]
