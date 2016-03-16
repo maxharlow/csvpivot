@@ -32,7 +32,7 @@ Emma,Germany,F,98000
 
 We could then find the average salary in each country:
 
-```
+```bash
 $ csvpivot test.csv --rows country --values 'mean(salary)'
 
 country,mean(salary)
@@ -43,7 +43,7 @@ UK,26500
 
 It would be useful to find out the maximum and minimum values too though:
 
-```
+```bash
 $ csvpivot test.csv --rows country --values 'mean(salary)' 'min(salary)' 'max(salary)'
 
 country,mean(salary),min(salary),max(salary)
@@ -56,7 +56,7 @@ As well as `mean`, `min`, and `max`, CSV Pivot also supports `median`, `sum`, `s
 
 Columns are also supported. So we could break down out data by gender:
 
-```
+```bash
 $ python csvpivot.py test.csv --rows country --values 'mean(salary)' --columns gender
 
 country,mean(salary):F,mean(salary):M
