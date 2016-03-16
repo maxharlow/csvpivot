@@ -18,7 +18,7 @@ def main():
         fields, data = pivot(data, headers, args['rows'], args['columns'], values)
         results = output(data, fields)
         print(results)
-    except BaseException as e: sys.exit(e.message.lower())
+    except BaseException as e: sys.exit(e)
 
 def arguments():
     parser = argparse.ArgumentParser(description='pivot tables for CSV files')
@@ -29,7 +29,7 @@ def arguments():
     args = vars(parser.parse_args())
     if args['FILE'] == '-' and sys.stdin.isatty():
         parser.print_help(sys.stderr)
-        parser.exit('')
+        parser.exit(1)
     return args
 
 def read(filename):
