@@ -59,7 +59,7 @@ As well as `mean`, `min`, and `max`, CSV Pivot also supports `median`, `sum`, `s
 Columns are also supported. So we could break down out data by gender:
 
 ```bash
-$ python csvpivot.py test.csv --rows country --values 'mean(salary)' --columns gender
+$ csvpivot test.csv --rows country --values 'mean(salary)' --columns gender
 
 country,mean(salary):F,mean(salary):M
 France,81500,59500
