@@ -71,12 +71,14 @@ def interpret(definitions, headers):
     aggregators = {}
     extractor = re.compile('^(.+)\((.+)\)$')
     definitions = definitions or []
+    definitions_seen = [] # for duplicate checking
     for definition in definitions:
+        if definition.lower() in definitions_seen: raise Exception(definition + ': cannot be specified multiple times')
+        definitions_seen.append(definition.lower())
         match = re.match(extractor, definition)
-        if match == None: raise Exception(definition + ': not in the correct format')
+        if match is None: raise Exception(definition + ': not in the correct format')
         operation = match.group(1)
         field = match.group(2)
-        if match is None: raise Exception(definition + ': value not correctly specified')
         if operation.lower() not in operations: raise Exception(definition + ': operation not found')
         if field not in headers: raise Exception(definition + ': not found in headers')
         if field in fields: aggregators.get(field).append(operations.get(operation))
@@ -93,7 +95,8 @@ def pivot(data, headers, rows, columns, values):
             if column not in headers: raise Exception(row + ': not found in headers')
     frame = pandas.DataFrame(data)
     if rows is None or values.get('fields') == []: raise Exception('rows and values must both be specified')
-    pivoted = frame.pivot_table(index=rows, columns=columns, values=values.get('fields'), aggfunc=values.get('aggregators'))
+    values_fields = [field for field in values.get('fields') if field not in rows] # should't be given as a value if specified as a row
+    pivoted = frame.pivot_table(index=rows, columns=columns, values=values_fields, aggfunc=values.get('aggregators'))
     results_set = pivoted.where(pandas.notnull(pivoted), None).reset_index().values
     results = [[int(v) if isinstance(v, float) and math.floor(v) == v else v for v in result] for result in results_set] # to int where possible
     columns_values = pivoted.columns.levels[2:]
