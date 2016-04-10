@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='csvpivot',
-    version='1.0',
+    version='1.1',
     description='Pivot tables for CSV files in the terminal.',
     long_description=open('README.md').read(),
     author='Max Harlow',
