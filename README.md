@@ -56,7 +56,7 @@ UK,26500,10000,43000
 
 As well as `mean`, `min`, and `max`, CSV Pivot also supports `median`, `sum`, `stddev`, `count`, `countuniq`, `concat`, and `concatuniq`. All require numerical values apart from the last two. If numbers contain commas they are interpreted as thousands separators and removed.
 
-Columns are also supported. So we could break down out data by gender:
+Columns are also supported. So we could break down our data by gender:
 
 ```bash
 $ csvpivot test.csv --rows country --values 'mean(salary)' --columns gender
