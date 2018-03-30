@@ -11,9 +11,9 @@ setup(
     license='Apache',
     packages=[''],
     install_requires=[
-        'chardet==2.3.0',
-        'numpy==1.10.4',
-        'pandas==0.17.1'
+        'chardet==3.0.4',
+        'numpy==1.14.2',
+        'pandas==0.22.0'
     ],
     entry_points = {
         'console_scripts': [
@@ -29,8 +29,8 @@ setup(
         'License :: OSI Approved :: Apache Software License',
         'Natural Language :: English',
         'Operating System :: OS Independent',
+        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.5',
         'Topic :: Scientific/Engineering :: Information Analysis',
         'Topic :: Utilities'
     ]
