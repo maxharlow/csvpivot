@@ -69,7 +69,7 @@ def interpret(definitions, headers):
     }
     fields = []
     aggregators = {}
-    extractor = re.compile('^(.+)\((.+)\)$')
+    extractor = re.compile('^(.+?)\((.+)\)$')
     definitions = definitions or []
     definitions_seen = [] # for duplicate checking
     for definition in definitions:
