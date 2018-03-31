@@ -1,8 +1,9 @@
 from setuptools import setup
+from cli import __version__
 
 setup(
     name='csvpivot',
-    version='1.1',
+    version=__version__,
     description='Pivot tables for CSV files in the terminal.',
     long_description=open('README.md').read(),
     author='Max Harlow',
@@ -17,7 +18,7 @@ setup(
     ],
     entry_points = {
         'console_scripts': [
-            'csvpivot = csvpivot:main'
+            'csvpivot = cli:main'
         ]
     },
     classifiers=[
