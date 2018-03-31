@@ -60,7 +60,7 @@ def coerce(reader):
         yield out
 
 def format(results, keys):
-    lines = ((value if sys.version_info >= (3, 0) else value.encode('utf8') for value in row) for row in results)
+    lines = [[value if sys.version_info >= (3, 0) or type(value) is not 'str' else value.encode('utf8') for value in row] for row in results]
     writer_io = io.StringIO() if sys.version_info >= (3, 0) else io.BytesIO()
     writer = csv.writer(writer_io, lineterminator='\n') # can't use dictwriter as headers are printed even when there's no results
     writer.writerow(keys)
