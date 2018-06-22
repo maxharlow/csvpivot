@@ -45,10 +45,12 @@ def read(filename, encoding):
     text_decoded = text.decode(encoding)
     reader_io = io.StringIO(text_decoded) if sys.version_info >= (3, 0) else io.BytesIO(text_decoded.encode('utf8'))
     reader = csv.reader(reader_io)
-    headers = next(reader)
-    if len(headers) != len(set(headers)): raise Exception(filename + ': has multiple columns with the same name')
-    data = coerce(reader)
-    return data, headers
+    try:
+        headers = next(reader)
+        if len(headers) != len(set(headers)): raise Exception(filename + ': has multiple columns with the same name')
+        data = coerce(reader)
+        return data, headers
+    except csv.Error as e: raise Exception(filename + ': could not read file -- try specifying the encoding')
 
 def coerce(reader):
     for row in reader:
