@@ -13,7 +13,7 @@ setup(
     packages=[''],
     install_requires=[
         'chardet==3.0.4',
-        'numpy==1.14.2',
+        'numpy==1.22.0',
         'pandas==0.22.0'
     ],
     entry_points = {
